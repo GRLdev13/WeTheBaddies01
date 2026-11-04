@@ -149,7 +149,7 @@ public class BasicBehaviour : MonoBehaviour
 	// Put a new behaviour on the behaviours watch list.
 	public void SubscribeBehaviour(GenericBehaviour behaviour)
 	{
-		behaviours.Add (behaviour);
+		behaviours.Add(behaviour);
 	}
 
 	// Set the default player behaviour.
