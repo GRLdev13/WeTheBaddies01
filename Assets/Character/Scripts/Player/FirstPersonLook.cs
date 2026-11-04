@@ -1,3 +1,4 @@
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
@@ -28,6 +29,7 @@ public class FirstPersonLook : MonoBehaviour
 
         if (Cursor.lockState != CursorLockMode.Locked || player == null)
             return;
+
 
         player.Rotate(Vector3.up, Input.GetAxisRaw("Mouse X") * sensitivity, Space.World);
         pitch = Mathf.Clamp(pitch - Input.GetAxisRaw("Mouse Y") * sensitivity, -pitchLimit, pitchLimit);
