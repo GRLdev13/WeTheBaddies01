@@ -1,7 +1,8 @@
-using Unity.Burst.CompilerServices;
+
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
+// La souris tourne le corps en horizontal et uniquement la camera en vertical.
 public class FirstPersonLook : MonoBehaviour
 {
     [SerializeField] private Transform player;
@@ -32,6 +33,7 @@ public class FirstPersonLook : MonoBehaviour
 
 
         player.Rotate(Vector3.up, Input.GetAxisRaw("Mouse X") * sensitivity, Space.World);
+        // Bloquer le tangage empeche de retourner la camera au-dela de la verticale.
         pitch = Mathf.Clamp(pitch - Input.GetAxisRaw("Mouse Y") * sensitivity, -pitchLimit, pitchLimit);
         transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
     }
@@ -44,3 +46,4 @@ public class FirstPersonLook : MonoBehaviour
         Cursor.visible = true;
     }
 }
+
