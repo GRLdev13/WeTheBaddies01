@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerInputManager))]
-// Etape 1 : convertir les axes en vitesse, puis appliquer gravite et collisions.
+// Step 1: convert input axes to velocity, then apply gravity and collisions.
 public class PlayerController : MonoBehaviour
 {
     public Camera playercamera;
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         Vector2 movement = input.MoveInput;
         Vector3 velocity = (transform.right * movement.x + transform.forward * movement.y) * moveSpeed;
         velocity.y = verticalSpeed;
-        // deltaTime transforme les metres/seconde en distance parcourue pendant cette image.
+        // deltaTime converts meters per second into distance traveled during this frame.
         controller.Move(velocity * Time.deltaTime);
     }
 }

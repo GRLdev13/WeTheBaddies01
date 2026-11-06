@@ -3,7 +3,7 @@ using UnityEditor.Animations;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-// Un graphe limite a la locomotion pour apprendre les Blend Trees progressivement.
+// A locomotion-only graph for learning Blend Trees step by step.
 public static class LocomotionLessonSetup
 {
     [MenuItem("School/Install player locomotion animations")]
@@ -30,7 +30,7 @@ public static class LocomotionLessonSetup
             var idle = AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/Character/Animations/Idle/Idle.anim");
             var walk = AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/Character/Animations/Locomotion/walk_fwd.anim");
             var strafe = AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/Character/Animations/Locomotion/strafe.anim");
-            // Recul = marche jouee a l'envers ; le clip lateral fourni va a gauche.
+            // Play the walk clip backward for reverse movement; the provided strafe clip moves left.
             tree.children = new[]
             {
                 new ChildMotion { motion = idle, position = Vector2.zero, timeScale = 1 },

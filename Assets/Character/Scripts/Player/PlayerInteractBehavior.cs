@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Adaptation locale de PlayerItemHolder / HeldItem : viser, prendre, suivre la main, deposer.
+// Local adaptation of PlayerItemHolder / HeldItem: aim, pick up, follow the hand, and drop.
 public class PlayerInteractBehavior : MonoBehaviour
 {
     [SerializeField] private Camera playerCamera;
@@ -23,7 +23,7 @@ public class PlayerInteractBehavior : MonoBehaviour
         if (playerCamera == null || Cursor.lockState != CursorLockMode.Locked) return;
         Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         float nearest = interactionDistance;
-        // On teste AUSSI les murs : ignorer les obstacles permettrait de prendre au travers.
+        // Test walls too: ignoring obstacles would allow picking up items through them.
         foreach (RaycastHit hit in Physics.RaycastAll(ray, interactionDistance,
                      Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
         {
@@ -40,7 +40,7 @@ public class PlayerInteractBehavior : MonoBehaviour
 
     public bool TryPickUp()
     {
-        // Prendre un nouvel objet depose automatiquement celui qui occupe la main.
+        // Picking up another item automatically drops the one currently held.
         if (target == null || target.IsHeld || handAnchor == null) return false;
         if (HeldItem != null && !DropHeldItem(target)) return false;
         target.PickUp(handAnchor);
@@ -53,11 +53,11 @@ public class PlayerInteractBehavior : MonoBehaviour
     private bool DropHeldItem(PickupItem itemBeingPickedUp)
     {
         if (HeldItem == null || playerCamera == null) return false;
-        // Cherche un volume libre DEVANT la capsule, sans traverser un mur.
+        // Find free space IN FRONT of the capsule without passing through a wall.
         Vector3 forward = Vector3.ProjectOnPlane(playerCamera.transform.forward, Vector3.up).normalized;
         Vector3 origin = transform.position + Vector3.up;
         Vector3 position = origin + forward * 1.1f;
-        // Le nouvel objet va rejoindre la main : il ne bloque pas la place liberee.
+        // The new item will move to the hand, so it does not block the drop location.
         foreach (RaycastHit hit in Physics.RaycastAll(origin, forward, 1.1f,
                      Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
             if (!hit.collider.transform.IsChildOf(transform)
@@ -73,7 +73,7 @@ public class PlayerInteractBehavior : MonoBehaviour
 
     private void OnDisable()
     {
-        // Evite de perdre un objet quand on desactive le personnage pendant le jeu.
+        // Avoid losing a held item when the character is disabled during play.
         if (HeldItem != null)
         {
             HeldItem.Drop(transform.position + transform.forward * 1.2f + Vector3.up);

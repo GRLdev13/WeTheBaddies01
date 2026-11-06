@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-// Edition seulement : reutilise les avant-bras ET les mains du personnage humain destination.
+// Editor only: reuse both the forearms AND hands of the destination project's human character.
 public static class HumanArmMeshBuilder
 {
     private const string Root = "Assets/FirstPersonLesson";
@@ -48,7 +48,7 @@ public static class HumanArmMeshBuilder
             if (mesh == null) { mesh = generated; AssetDatabase.CreateAsset(mesh, path); }
             else
             {
-                // Conserver le GUID preserve les references deja presentes dans les prefabs.
+                // Keep the GUID to preserve existing prefab references.
                 EditorUtility.CopySerialized(generated, mesh);
                 UnityEngine.Object.DestroyImmediate(generated);
                 EditorUtility.SetDirty(mesh);
@@ -99,7 +99,7 @@ public static class HumanArmMeshBuilder
             if (map.TryGetValue(i, out int existing)) return existing;
             int index = vertices.Count;
             map.Add(i, index);
-            // La pose de liaison fournit le meme repere pour les maillages bras et mains.
+            // The bind pose provides the same coordinate frame for the arm and hand meshes.
             vertices.Add(rotation * (original[i] - elbow) * scale);
             uv.Add(originalUV[i]);
             return index;

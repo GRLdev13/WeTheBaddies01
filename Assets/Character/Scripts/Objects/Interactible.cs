@@ -1,8 +1,8 @@
 using UnityEngine;
 
-// Ancien marqueur deja attache a certains objets de la scene.
-// Un composant attache doit heriter de MonoBehaviour : une interface provoquait
-// l'erreur Unity "ExtensionOfNativeClass". Pour ramasser un objet, ajouter PickupItem.
+// Legacy marker already attached to some scene objects.
+// An attached component must inherit from MonoBehaviour; using an interface caused
+// Unity's "ExtensionOfNativeClass" error. Add PickupItem to make an object pickable.
 public class Interactible : MonoBehaviour
 {
 }

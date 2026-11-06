@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-// Outil d'edition uniquement : les prefabs generes sont des objets Unity ordinaires.
+// Editor-only tool: the generated prefabs are ordinary Unity objects.
 public static class FirstPersonLessonSetup
 {
     private const string Root = "Assets/FirstPersonLesson";
@@ -42,7 +42,7 @@ public static class FirstPersonLessonSetup
             new Vector3(0, -0.12f, 0), new Vector3(0, 0, 15));
         var bucket = MakeTool("Bucket", "Seau", "SM_Bucket_Tier1", palette,
             new Vector3(0, -0.30f, 0), Vector3.zero);
-        // Les objets sont places devant le point de depart, sur le sol detecte par un rayon.
+        // Place items in front of the starting position on the ground detected by a raycast.
         Place(pickaxe, player.transform.position + player.transform.forward * 2f - player.transform.right * 0.6f);
         Place(bucket, player.transform.position + player.transform.forward * 2f + player.transform.right * 0.6f);
         PrefabUtility.SaveAsPrefabAsset(rig, Root + "/Prefabs/FirstPersonArms.prefab");

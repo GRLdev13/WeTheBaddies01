@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Un objet ramassable ne connait pas les touches : le joueur decide quand le prendre.
+// A pickup item does not handle input: the player decides when to pick it up.
 [RequireComponent(typeof(Rigidbody))]
 public class PickupItem : MonoBehaviour
 {
@@ -32,7 +32,7 @@ public class PickupItem : MonoBehaviour
     {
         if (IsHeld || hand == null) return;
         if (!body.isKinematic) { body.linearVelocity = Vector3.zero; body.angularVelocity = Vector3.zero; }
-        // La physique ne doit pas pousser le joueur pendant que l'objet suit la main.
+        // Physics must not push the player while the item follows the hand.
         body.isKinematic = true;
         body.useGravity = false;
         for (int i = 0; i < colliders.Length; i++)
@@ -49,11 +49,11 @@ public class PickupItem : MonoBehaviour
     public void Drop(Vector3 position)
     {
         if (!IsHeld) return;
-        // Detacher conserve la taille et la rotation visibles, puis restitue la physique.
+        // Detach while preserving the visible scale and rotation, then restore physics.
         transform.SetParent(null, true);
         transform.position = position;
         for (int i = 0; i < colliders.Length; i++) colliders[i].enabled = colliderStates[i];
-        // Un objet depose redevient toujours dynamique : la gravite le fait tomber.
+        // A dropped item always becomes dynamic again so gravity makes it fall.
         body.isKinematic = false;
         body.useGravity = true;
         if (!body.isKinematic) { body.linearVelocity = Vector3.zero; body.angularVelocity = Vector3.zero; }

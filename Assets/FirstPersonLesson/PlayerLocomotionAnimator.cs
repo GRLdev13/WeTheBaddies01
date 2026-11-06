@@ -1,7 +1,7 @@
 using UnityEngine;
 
-// Apres PlayerController : animer la vitesse reelle, pas seulement la touche pressee.
-// Ainsi, marcher contre un mur ramene progressivement le personnage au repos.
+// Run after PlayerController: animate actual velocity rather than keyboard input alone.
+// Walking into a wall therefore gradually returns the character to idle.
 [DefaultExecutionOrder(50)]
 [RequireComponent(typeof(CharacterController), typeof(Animator))]
 public class PlayerLocomotionAnimator : MonoBehaviour
@@ -17,7 +17,7 @@ public class PlayerLocomotionAnimator : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-        // Le CharacterController reste responsable de la position et des collisions.
+        // The CharacterController remains responsible for position and collisions.
         animator.applyRootMotion = false;
         animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
     }

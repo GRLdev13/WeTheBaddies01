@@ -38,7 +38,7 @@ public static class HoldingPoseSetup
         controller.layers = layers;
         animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
         animator.applyRootMotion = false;
-        // Conserver le visage visible ; placer l'oeil devant la geometrie du crane.
+        // Keep the face visible and place the camera ahead of the head geometry.
         foreach (var renderer in player.GetComponentsInChildren<SkinnedMeshRenderer>(true))
         {
             if (renderer.shadowCastingMode == UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly)

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Etape 1 : lire le clavier AZERTY, sans deplacer directement le personnage.
+// Step 1: read the AZERTY keyboard without moving the character directly.
 public class PlayerInputManager : MonoBehaviour
 {
     public Vector2 MoveInput { get; private set; }
@@ -15,7 +15,7 @@ public class PlayerInputManager : MonoBehaviour
 
         float horizontal = (Input.GetKey(KeyCode.D) ? 1f : 0f) - (Input.GetKey(KeyCode.Q) ? 1f : 0f);
         float vertical = (Input.GetKey(KeyCode.Z) ? 1f : 0f) - (Input.GetKey(KeyCode.S) ? 1f : 0f);
-        // Limiter la longueur a 1 evite une diagonale plus rapide.
+        // Limit the vector length to 1 to prevent faster diagonal movement.
         MoveInput = Vector2.ClampMagnitude(new Vector2(horizontal, vertical), 1f);
     }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Balancement de l'objet uniquement : les bras visibles sont ceux du personnage.
+// Only sway the held item: the visible arms belong to the character.
 [DefaultExecutionOrder(100)]
 public class FirstPersonArms : MonoBehaviour
 {
